@@ -1,171 +1,171 @@
 <html>
-    <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css"/>
-        <link rel="stylesheet" href="css/estilo.css"/>
-        <script src="cordova.js"></script>
-        <script src="js/jquery-2.1.4.min.js"></script>
-        <script src="js/jquery.mobile-1.4.5.min.js"></script>
-        <script src="js/PocoDeTodo.js"></script>
-        <script src="js/LocalStorage.js"></script>
-        <script src="js/General.js"></script>
-        <script src="js/Geolocation.js"></script>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css"/>
+    <link rel="stylesheet" href="css/estilo.css"/>
+    <script src="cordova.js"></script>
+    <script src="js/libs/jquery-2.1.4.min.js"></script>
+    <script src="js/libs/jquery.mobile-1.4.5.min.js"></script>
+    <script src="js/PocoDeTodo.js"></script>
+    <script src="js/LocalStorage.js"></script>
+    <script src="js/General.js"></script>
+    <script src="js/Geolocation.js"></script>
 
 
-    </head>
+</head>
 
-    <body>
-        <!----------------------------------LOGIN------------------------------------------------------->
-        <section data-role="page" id="index">
+<body>
+<!----------------------------------LOGIN------------------------------------------------------->
+<section data-role="page" id="index">
 
-            <header data-role="header">
-                <h1>Bienvenido</h1>
-            </header>
+    <header data-role="header">
+        <h1>Bienvenido</h1>
+    </header>
 
-            <!--Los archivos que se listen se les debe de poder hacer click y
-              mostrar un mensaje para eliminarlos o editarlos-->
+    <!--Los archivos que se listen se les debe de poder hacer click y
+      mostrar un mensaje para eliminarlos o editarlos-->
 
-            <div data-role="content">
+    <div data-role="content">
 
-                <label for="usuario_password">Contraseña:</label>
-                <input type="password" id="usuario_password"/>
-                <input type="button" value="Entrar" onclick="entrar();"/> 
-            </div>
+        <label for="usuario_password">Contraseña:</label>
+        <input type="password" id="usuario_password"/>
+        <input type="button" value="Entrar" onclick="entrar();"/>
+    </div>
 
-            <footer data-role="footer" data-position="fixed">
-                <a id="regBtn" data-role="button" data-transition="pop" href="#registrarse">Registrar Contraseña</a>
-                <!--Links de Prueba-->
-                <a data-role="button" data-transition="pop" href="#altaPoza">Alta</a>
-                <a data-role="button" data-transition="pop" href="#listaPozas">Lista</a>
-                <a data-role="button" data-transition="pop" href="#verPoza">Registrarse</a>
-                <a data-role="button" data-transition="pop" href="#modificarPoza">Modificar</a>
+    <footer data-role="footer" data-position="fixed">
+        <a id="regBtn" data-role="button" data-transition="pop" href="#registrarse">Registrar Contraseña</a>
+        <!--Links de Prueba-->
+        <a data-role="button" data-transition="pop" href="#altaPoza">Alta</a>
+        <a data-role="button" data-transition="pop" href="#listaPozas">Lista</a>
+        <a data-role="button" data-transition="pop" href="#verPoza">Registrarse</a>
+        <a data-role="button" data-transition="pop" href="#modificarPoza">Modificar</a>
 
-            </footer>
-        </section>
+    </footer>
+</section>
 
-        <!----------------------------------REGISTRO---------------------------------------------------->
-        <section data-role="page" id="registrarse">
-            <header data-role="header">
-                <h1>Registro Constraseña</h1>
-            </header>
+<!----------------------------------REGISTRO---------------------------------------------------->
+<section data-role="page" id="registrarse">
+    <header data-role="header">
+        <h1>Registro Constraseña</h1>
+    </header>
 
-            <div data-role="content">
-                <label for="password_alta">Contraseña: </label>
-                <input type="password" id="password_alta" required/>
-                <input type="button" value="Aceptar" onclick="guardarPassword();"/>
-                <input type="button" value="limpirarLocal" onclick="limpiarLocalStorage();"/>
-                <input type="button" value="mostarValores" onclick="mostrarValores();" />
-            </div>
+    <div data-role="content">
+        <label for="password_alta">Contraseña: </label>
+        <input type="password" id="password_alta" required/>
+        <input type="button" value="Aceptar" onclick="guardarPassword();"/>
+        <input type="button" value="limpirarLocal" onclick="limpiarLocalStorage();"/>
+        <input type="button" value="mostarValores" onclick="mostrarValores();"/>
+    </div>
 
-            <footer data-role="footer" data-position="fixed">
-                <input data-icon="delete" type="button" onclick="cancelar();" value="cancelar"/>
-            </footer>
-        </section>
+    <footer data-role="footer" data-position="fixed">
+        <input data-icon="delete" type="button" onclick="cancelar();" value="cancelar"/>
+    </footer>
+</section>
 
-        <!----------------------------------LISTADO POZAS---------------------------------------->
-        <section data-role="page" id="listaPozas">
-            <header data-role="header">
-                <h1>Pozas</h1>
-            </header>
+<!----------------------------------LISTADO POZAS---------------------------------------->
+<section data-role="page" id="listaPozas">
+    <header data-role="header">
+        <h1>Pozas</h1>
+    </header>
 
-            <div data-role="content">
-                <div id="divList">
+    <div data-role="content">
+        <div id="divList">
 
-                </div>   
-            </div>
+        </div>
+    </div>
 
-            <div id="popups">
+    <div id="popups">
 
-            </div>
+    </div>
 
-            <input type="button" value="Exportar" onclick="exportar();">
+    <input type="button" value="Exportar" onclick="exportar();">
 
-            <footer data-role="footer" data-position="fixed">
-                <input data-icon="plus" type="button" onclick="IrAagregarPoza();" value="Agregar"/>
-                <input data-icon="delete" type="button" onclick="cerrarSesion();" value="Cerrar Sesion"/>
-            </footer>
-        </section>
+    <footer data-role="footer" data-position="fixed">
+        <input data-icon="plus" type="button" onclick="IrAagregarPoza();" value="Agregar"/>
+        <input data-icon="delete" type="button" onclick="cerrarSesion();" value="Cerrar Sesion"/>
+    </footer>
+</section>
 
-        <!----------------------------------ALTA POZA-------------------------------------------->
-        <section data-role="page" id="altaPoza">
-            <header data-role="header">
-                <h1>Agregar Poza</h1>
-            </header>
+<!----------------------------------ALTA POZA-------------------------------------------->
+<section data-role="page" id="altaPoza">
+    <header data-role="header">
+        <h1>Agregar Poza</h1>
+    </header>
 
-            <div data-role="content">
-                <label for="nombre_poza_alta">Nombre Poza</label>
-                <input type="text" id="nombre_poza_alta" required/>
+    <div data-role="content">
+        <label for="nombre_poza_alta">Nombre Poza</label>
+        <input type="text" id="nombre_poza_alta" required/>
 
-                <label for="latitud_poza_alta">Latitud:</label>
-                <input type="text" id="latitud_poza_alta" disabled/>
-                <label for="longitud_poza_alta">Longitud:</label>
-                <input type="text" id="longitud_poza_alta" disabled/>
-                
-                <input type="button" onclick="obtenerLocalizacion();" value="Obtener Posicion" />
+        <label for="latitud_poza_alta">Latitud:</label>
+        <input type="text" id="latitud_poza_alta" disabled/>
+        <label for="longitud_poza_alta">Longitud:</label>
+        <input type="text" id="longitud_poza_alta" disabled/>
 
-                <p>Haga click en el boton vol+ para elegir una imagen de su biblioteca</p>
-                <img id="mi_img" src="img/pic.jpg" />
-            </div>
+        <input type="button" onclick="obtenerLocalizacion();" value="Obtener Posicion"/>
 
-            <footer data-role="footer" data-position="fixed">
-                <input data-icon="check" type="button" value="Guardar" onclick="guargarDatosPoza();"/>  
-                <input data-icon="delete" type="button" onclick="cancelar();" value="Cancelar"/>
-            </footer>
-        </section>
+        <p>Haga click en el boton vol+ para elegir una imagen de su biblioteca</p>
+        <img id="mi_img" src=""/>
+    </div>
 
-        <!----------------------------------VER POZA--------------------------------------------->
-        <section data-role="page" id="verPoza">
-            <header data-role="header">
-                <h1>Info Poza</h1>
-            </header>
+    <footer data-role="footer" data-position="fixed">
+        <input data-icon="check" type="button" value="Guardar" onclick="guargarDatosPoza();"/>
+        <input data-icon="delete" type="button" onclick="cancelar();" value="Cancelar"/>
+    </footer>
+</section>
 
-            <div data-role="content">
-                <label for="nombre_poza_ver">Poza: </label>
-                <input type="text" id="nombre_poza_ver" disabled/>
+<!----------------------------------VER POZA--------------------------------------------->
+<section data-role="page" id="verPoza">
+    <header data-role="header">
+        <h1>Info Poza</h1>
+    </header>
 
-                <label for="latitud_poza_ver">Latitud:</label>
-                <input type="text" id="latitud_poza_ver" disabled/>
+    <div data-role="content">
+        <label for="nombre_poza_ver">Poza: </label>
+        <input type="text" id="nombre_poza_ver" disabled/>
 
-                <label for="longitud_poza_ver">Longitud:</label>
-                <input type="text" id="longitud_poza_ver" disabled/>
+        <label for="latitud_poza_ver">Latitud:</label>
+        <input type="text" id="latitud_poza_ver" disabled/>
 
-                <div id="mapaPoza">
-                </div>  
-            </div>
+        <label for="longitud_poza_ver">Longitud:</label>
+        <input type="text" id="longitud_poza_ver" disabled/>
 
-
-
-            <footer data-role="footer" data-position="fixed">
-                <input data-icon="back" type="button" onclick="cancelar();" value="Cancelar"/>
-            </footer>
-        </section>
-
-        <!----------------------------------MODIFICAR POZA--------------------------------------->
-
-        <section data-role="page" id="modificarPoza">
-            <header data-role="header">
-                <h1>Editar Datos Poza</h1>
-            </header>
-
-            <div data-role="content">
-                <label for="nombre_poza_modif">Poza:</label>
-                <input type="text" id="nombre_poza_modif" />
-
-                <label for="latitud_poza_modif">Latitud:</label>
-                <input type="text" id="latitud_poza_modif" />
-
-                <label for="longitud_poza_modif">Longitud:</label>
-                <input type="text" id="longitud_poza_modif" />
+        <div id="mapaPoza">
+        </div>
+          
+    </div>
 
 
-            </div>
+    <footer data-role="footer" data-position="fixed">
+        <input data-icon="back" type="button" onclick="cancelar();" value="Cancelar"/>
+    </footer>
+</section>
 
-            <footer data-role="footer" data-position="fixed">
-                <input data-icon="check" type="button" value="Guardar" onclick="guardarCambios();"/> 
-                <input data-icon="delete" type="button" onclick="cancelar();" value="Cancelar"/>
-            </footer>
-        </section>
+<!----------------------------------MODIFICAR POZA--------------------------------------->
+
+<section data-role="page" id="modificarPoza">
+    <header data-role="header">
+        <h1>Editar Datos Poza</h1>
+    </header>
+
+    <div data-role="content">
+        <label for="nombre_poza_modif">Poza:</label>
+        <input type="text" id="nombre_poza_modif"/>
+
+        <label for="latitud_poza_modif">Latitud:</label>
+        <input type="text" id="latitud_poza_modif"/>
+
+        <label for="longitud_poza_modif">Longitud:</label>
+        <input type="text" id="longitud_poza_modif"/>
 
 
-    </body>
+    </div>
+
+    <footer data-role="footer" data-position="fixed">
+        <input data-icon="check" type="button" value="Guardar" onclick="guardarCambios();"/>
+        <input data-icon="delete" type="button" onclick="cancelar();" value="Cancelar"/>
+    </footer>
+</section>
+
+
+</body>
 </html>
