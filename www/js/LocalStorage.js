@@ -10,7 +10,7 @@ function mostrarValores() {
     alert("LocalStorage: " + localStorage.length + '\n' + 'passRegistrada: ' + localStorage.getItem("passRegistrada") + '\n' + 'password: ' + localStorage.getItem("password"));
 }
 
-//Ingresar a con la contraseña registrada anteriormente
+//Ingresar a con la contraseï¿½a registrada anteriormente
 function entrar(){
         var usuario_password = document.getElementById("usuario_password").value;
         var password = localStorage.getItem("password");
@@ -18,16 +18,16 @@ function entrar(){
         if(usuario_password == password){
             window.location.href = '#listaPozas';
         }else{
-            alert("Contraseña Incorrecta");
+            alert("ContraseÃ±a Incorrecta");
         }
 }
 
-//Registramos la Contraseña
+//Registramos la ContraseÃ±a
 function guardarPassword() {
     var password = document.getElementById("password_alta").value;
     localStorage.setItem("password", password);
     localStorage.setItem("passRegistrada", 1);
-    alert("Contraseña Guardada");
+    alert("ContraseÃ±a Guardada");
     window.location.href = 'index.html';
 
 }
