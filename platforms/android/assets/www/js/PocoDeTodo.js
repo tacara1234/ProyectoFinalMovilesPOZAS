@@ -13,25 +13,25 @@ function onDeviceReady() {
     document.addEventListener("volumeupbutton", onVolumeUpKeyDown, false);
     pictureSource = navigator.camera.PictureSourceType;
     destinationType = navigator.camera.DestinationType;
-    
-    //Verificamos la contraseña ya fue registrada o todavia
+
+    //Verificamos la contraseï¿½a ya fue registrada o todavia
     if (localStorage.getItem("passRegistrada") < 1) {
         localStorage.setItem("passRegistrada", 0);
     }
 
 
     window.requestFileSystem = window.requestFileSystem
-            || window.webkitRequestFileSystem;
+        || window.webkitRequestFileSystem;
     // Start the app by requesting a FileSystem (if the browser supports the API)
     if (window.requestFileSystem) {
         initFileSystem();
 
         window.requestFileSystem(LocalFileSystem.PERSISTENT,
-                0, onFileSystemSuccess, fail);
+            0, onFileSystemSuccess, fail);
     }
 
-    //si la contraseña ya fue registrada quitamos el boton para registrarnos
-    //Pero ese boton lo quiero sustituir por uno con el que se pueda cambiar la contraseña
+    //si la contraseï¿½a ya fue registrada quitamos el boton para registrarnos
+    //Pero ese boton lo quiero sustituir por uno con el que se pueda cambiar la contraseï¿½a
     if (localStorage.getItem("passRegistrada") == 1) {
         document.getElementById("regBtn").style.display = 'none';
     }
@@ -40,8 +40,12 @@ function onDeviceReady() {
 
 //Asignamos la funcion para escoger la imagen cunado se presione el boton volumeup
 function onVolumeUpKeyDown() {
-   //se llama al getPicture
-    navigator.camera.getPicture(selectPictureSuccess, selectPictureFail, {quality: 50, destinationType: destinationType.FILE_URI, sourceType: pictureSource.SAVEDPHOTOALBUM})
+    //se llama al getPicture
+    navigator.camera.getPicture(selectPictureSuccess, selectPictureFail, {
+        quality: 50,
+        destinationType: destinationType.FILE_URI,
+        sourceType: pictureSource.SAVEDPHOTOALBUM
+    })
 }
 
 //Se selecciona la imagen y se sustituye 
@@ -65,11 +69,11 @@ function onFileSystemSuccess(filesystem) {
     // In here, we put where the folder is. If it is found, then it
     // continues to getDirSuccess
     filesystem.root.getDirectory(folderName,
-            {
-                create: false, exclusive: false
-            },
-    getDirSuccess,
-            fail);
+        {
+            create: false, exclusive: false
+        },
+        getDirSuccess,
+        fail);
 }
 
 function getDirSuccess(dirEntry) {
@@ -87,19 +91,19 @@ function readerSuccess(entries) {
 
     for (i = 0; i < entries.length; i++) {
         listado += "<li data-icon='gear'><a href='#opciones" + i +
-                "' data-rel='popup' data-position-to='window' " +
-                "data-transition='pop'>" + entries[i].name +
-                "</a></li>";
+            "' data-rel='popup' data-position-to='window' " +
+            "data-transition='pop'>" + entries[i].name +
+            "</a></li>";
         var options = "opciones" + i;
         var deleteOperation = "delop" + i;
         var editOperation = "editop" + i;
         popUps += "<div data-role='popup' id='" + options + "' data-theme='a' data-overlay-theme='b' " +
-                "class='ui-content' style='max-width:340px; padding-bottom:2em;'> " +
-                "<h3>Escoja la operacion</h3>" +
-                "<input id='" + deleteOperation + "' type='button' data-icon='delete' " +
-                "value='eliminar' />" +
-                "<input id='" + editOperation + "' type='button' data-icon='edit' " +
-                "value='modificar' /></div>";
+            "class='ui-content' style='max-width:340px; padding-bottom:2em;'> " +
+            "<h3>Escoja la operacion</h3>" +
+            "<input id='" + deleteOperation + "' type='button' data-icon='delete' " +
+            "value='eliminar' />" +
+            "<input id='" + editOperation + "' type='button' data-icon='edit' " +
+            "value='modificar' /></div>";
 
 
     }
@@ -111,9 +115,9 @@ function readerSuccess(entries) {
         (function (counter) {
             //It is added the delete operation as 'onclick' in each link
             document.getElementById('delop' + counter).
-                    addEventListener("click", function () {
-                        deleteFile(entries[counter].name);
-                    });
+            addEventListener("click", function () {
+                deleteFile(entries[counter].name);
+            });
         }(counter));
 
     }
@@ -122,9 +126,9 @@ function readerSuccess(entries) {
         (function (k) {
             //It is added the the function that will set the info from the read file, in the view
             document.getElementById('editop' + k).
-                    addEventListener("click", function () {
-                        setInfoFromFile(entries[k].name);
-                    });
+            addEventListener("click", function () {
+                setInfoFromFile(entries[k].name);
+            });
         }(k));
 
     }
@@ -135,7 +139,7 @@ function actualizarLista(datos) {
     if (!listcreated) {
         var divList = $("#divList");
         divList.append("<ul id='lista' data-role='listview' data-inset='true' data-filter='true' " +
-                "data-filter-placeholder='buscar..'></ul>");
+            "data-filter-placeholder='buscar..'></ul>");
         listCreated = true;
         divList.trigger("create");
     }
@@ -176,26 +180,25 @@ function saveEditedFile() {
     var content = document.getElementById("contenido_archivo_modificar").value;
     var path = pathContext + filename;
 
-    //alert(path);
     filesystem.root.getFile(
-            path,
-            {
-                create: false
-            },
-    function (fileEntry) {
-        // Create a FileWriter object for our FileEntry
-        // (with the given name of the file).
-        fileEntry.createWriter(function (fileWriter) {
-            fileWriter.seek(0); //Start write position at the beginning of the file
-            var fileParts = [content];
-            var contentBlob = new Blob(fileParts, {
-                type: 'text/html'
-            });
-            fileWriter.write(contentBlob);
+        path,
+        {
+            create: false
+        },
+        function (fileEntry) {
+            // Create a FileWriter object for our FileEntry
+            // (with the given name of the file).
+            fileEntry.createWriter(function (fileWriter) {
+                fileWriter.seek(0); //Start write position at the beginning of the file
+                var fileParts = [content];
+                var contentBlob = new Blob(fileParts, {
+                    type: 'text/html'
+                });
+                fileWriter.write(contentBlob);
+
+            }, errorHandler);
 
         }, errorHandler);
-
-    }, errorHandler);
     alert("Archivo Modificado");
 }
 
@@ -229,22 +232,22 @@ function saveFile() {
 
 
 function deleteFile(filename) {
-    var proceed = confirm("Seguro desea eliminar este archivo: " + filename);
-    if (!proceed)
+
+    if (!confirm("Seguro desea eliminar este archivo: " + filename))
         return;
 
     var path = pathContext + filename;
     filesystem.root.getFile(path,
-            {
-                create: false
-            },
-    function (fileEntry) {
-        fileEntry.remove(function () {
-            alert("Archivo " + filename + " Eliminado");
-            window.location.href = "index.html";
-        }, errorHandler);
+        {
+            create: false
+        },
+        function (fileEntry) {
+            fileEntry.remove(function () {
+                alert("Archivo " + filename + " Eliminado");
+                window.location.href = "index.html";
+            }, errorHandler);
 
-    }, errorHandler);
+        }, errorHandler);
 }
 
 function fail() {
@@ -281,10 +284,10 @@ function errorHandler(error) {
 
 //Esto no sirve pero tarde un vergo en hacerlo no lo quiten jaja
 function guargarDatosUsuario() {
+    var nombre = document.getElementById("nombre_usuario_alta").value;
+    var password = document.getElementById("password_usuario_alta").value;
     if (parseInt(localStorage.getItem("numUsuarios")) >= 0 && parseInt(localStorage.getItem("numPasswords")) >= 0) {
         alert("Ya habian usuarios y claves");
-        var nombre = document.getElementById("nombre_usuario_alta").value;
-        var password = document.getElementById("password_usuario_alta").value;
 
         if (nombre != "" && password != "") {
 
@@ -308,8 +311,6 @@ function guargarDatosUsuario() {
                 alert('a)Local Storage es:' + localStorage.length);
 
 
-
-
                 localStorage.setItem("usuario" + localStorage.getItem("numUsuarios"), nombre);
                 localStorage.setItem("password" + localStorage.getItem("numPasswords"), password);
             }
@@ -319,11 +320,7 @@ function guargarDatosUsuario() {
         }
     } else {
         alert("No habian usuarios y claves");
-        var nombre = document.getElementById("nombre_usuario_alta").value;
-        var password = document.getElementById("password_usuario_alta").value;
         if (nombre != "" && password != "") {
-
-
             localStorage.setItem("numUsuarios", 0);
             localStorage.setItem("numPasswords", 0);
             alert('b)Local Storage es:' + localStorage.length);
@@ -338,7 +335,6 @@ function guargarDatosUsuario() {
 
     alert('c)Local Storage es:' + localStorage.length);
 }
-
 
 
 //Esto no sirve pero tarde un vergo en hacerlo no lo quiten jaja
