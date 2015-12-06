@@ -37,10 +37,11 @@
     <footer data-role="footer" data-position="fixed">
         <a id="regBtn" data-role="button" data-transition="pop" href="#registrarse">Registrar Contraseña</a>
         <!--Links de Prueba-->
-        <a data-role="button" data-transition="pop" href="#altaPoza">Alta</a>
-        <a data-role="button" data-transition="pop" href="#listaPozas">Lista</a>
-        <a data-role="button" data-transition="pop" href="#verPoza">Registrarse</a>
-        <a data-role="button" data-transition="pop" href="#modificarPoza">Modificar</a>
+        <!--<a data-role="button" data-transition="pop" href="#altaPoza">Alta</a>-->
+        <!--<a data-role="button" data-transition="pop" href="#listaPozas">Lista</a>-->
+        <!--<a data-role="button" data-transition="pop" href="#verPoza">Registrarse</a>-->
+        <!--<a data-role="button" data-transition="pop" href="#modificarPoza">Modificar</a>-->
+        <a data-role="button" data-transition="pop" href="#registrarse">Configuraciones</a>
 
     </footer>
 </section>
@@ -54,9 +55,16 @@
     <div data-role="content">
         <label for="password_alta">Contraseña: </label>
         <input type="password" id="password_alta" required/>
+
+        <label for="password_alta_repeticion">Repita la contraseña: </label>
+        <input type="password" id="password_alta_repeticion" required/>
+
+        <div id="msg-warning" style="display: none; background-color: red; color:white;">
+            Las contraseñas no coinciden
+        </div>
         <input type="button" value="Aceptar" onclick="guardarPassword();"/>
-        <input type="button" value="limpirarLocal" onclick="limpiarLocalStorage();"/>
-        <input type="button" value="mostarValores" onclick="mostrarValores();"/>
+        <!--<input type="button" value="limpirarLocal" onclick="limpiarLocalStorage();"/>-->
+        <!--<input type="button" value="mostarValores" onclick="mostrarValores();"/>-->
     </div>
 
     <footer data-role="footer" data-position="fixed">

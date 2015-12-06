@@ -14,12 +14,13 @@ function populateDB(tx) {
     tx.executeSql('DROP TABLE IF EXISTS ponds');
     tx.executeSql('CREATE TABLE IF NOT EXISTS ponds (id INTEGER' +
         ' PRIMARY KEY AUTOINCREMENT NOT NULL, latitude, altitude, name, path_image)');
-    tx.executeSql('INSERT INTO ponds (id, latitude, altitude, name, path_image) ' +
-        'VALUES (1,"55.3","43.7", "Poza 1", "path_image")');
-    tx.executeSql('INSERT INTO ponds (id, latitude, altitude, name, path_image) ' +
-        'VALUES (2,"55.3","43.7","Poza 2","path_image")');
-    tx.executeSql('INSERT INTO ponds (id, latitude, altitude, name, path_image) ' +
-        'VALUES (3,"55.3","43.7", "Poza 3","path_image")');
+    //Lo siguiente son datos dummy, si los queremos solo descomentamos lo sig:
+    //tx.executeSql('INSERT INTO ponds (id, latitude, altitude, name, path_image) ' +
+    //    'VALUES (1,"55.3","43.7", "Poza 1", "Test Path")');
+    //tx.executeSql('INSERT INTO ponds (id, latitude, altitude, name, path_image) ' +
+    //    'VALUES (2,"55.3","43.7","Poza 2","Test Path")');
+    //tx.executeSql('INSERT INTO ponds (id, latitude, altitude, name, path_image) ' +
+    //    'VALUES (3,"55.3","43.7", "Poza 3","Test Path")');
 }
 function errorDB(err) {
     alert("Error processing SQL: " + err.code + ", " + err.message);
@@ -35,21 +36,42 @@ function queryDB(tx) {
 function querySuccess(tx, results) {
     //first get the number of rows in the result set
     var len = results.rows.length;
-    localStorage.setItem("last_id", len + 1);
     var status = document.getElementById("divListPonds");
-    var string = "Pozas: " + len + "<br/>";
-    string += "<table><tr><td>ID</td>" +
-        "<td>Nombre de la poza</td>" +
-        "</tr>";
-    for (var i = 0; i < len; i++) {
-        string +=
-            "<tr><td>" + results.rows.item(i).id + "</td>" +
-            "<td>" + results.rows.item(i).name + "</td>" +
+    localStorage.setItem("last_id", len + 1);
+    if (len == 0) {
+        status.innerHTML = "No hay pozas registradas.";
+    } else {
+        var string = "Pozas: " + len + "<br/>";
+        string += "<table><tr><td>Número</td>" +
+            "<td>Nombre de la poza</td>" +
             "</tr>";
+        for (var i = 0; i < len; i++) {
+            string +=
+                "<tr><td>" + results.rows.item(i).id + "</td>" +
+                "<td>" + results.rows.item(i).name + "</td>" +
+                "</tr>";
+        }
+        status.innerHTML = string;
     }
-    status.innerHTML = string;
+
 }
+
+
 function guargarDatosPoza() {
+
+    if ($('#nombre_poza_alta').val() == '' ||
+        $('#latitud_poza_alta').val() == '' ||
+        $('#longitud_poza_alta').val() == '') {
+        alert("Llene todos los campos por favor. ");
+        return;
+    }
+
+    if (window.localStorage.getItem("photo") == null) {
+        alert("Escoja una foto por favor");
+        return;
+    }
+
+
     var db = window.openDatabase(db_name, db_version, db_name, 200000);
     db.transaction(save_new_pond, errorDB, successDB);
 }
@@ -84,6 +106,5 @@ function delete_pond(pond_id) {
 
 function delete_from_db(tx) {
     tx.executeSql('DELETE FROM ponds WHERE id=?', [id_pond_to_delete]);
-
 }
 

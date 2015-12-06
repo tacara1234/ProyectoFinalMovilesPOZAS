@@ -9,6 +9,7 @@ function cancelar() {
 
 function cerrarSesion() {
     document.getElementById("password_alta").value = "";
+    document.getElementById("password_alta_repeticion").value = "";
     document.getElementById("usuario_password").value = "";
     //Regresamos al index.html
     window.location.href = '#index';
@@ -32,5 +33,7 @@ function limpiar_campos() {
     document.getElementById("latitud_poza_modif").value = "";
     document.getElementById("longitud_poza_modif").value = "";
 
+    //removemos el local storage de la foto.
+    window.localStorage.removeItem("photo");
 }
 
