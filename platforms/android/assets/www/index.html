@@ -4,12 +4,14 @@
     <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css"/>
     <link rel="stylesheet" href="css/estilo.css"/>
     <script src="cordova.js"></script>
+    <script src="js/libs/google-maps.js"></script>
     <script src="js/libs/jquery-2.1.4.min.js"></script>
     <script src="js/libs/jquery.mobile-1.4.5.min.js"></script>
-    <script src="js/PocoDeTodo.js"></script>
+    <script src="js/Geolocation.js"></script>
+    <script src="js/database.js"></script>
     <script src="js/LocalStorage.js"></script>
     <script src="js/General.js"></script>
-    <script src="js/Geolocation.js"></script>
+    <script src="js/PocoDeTodo.js"></script>
 
 
 </head>
@@ -69,7 +71,7 @@
     </header>
 
     <div data-role="content">
-        <div id="divList">
+        <div id="divListPonds">
 
         </div>
     </div>
@@ -79,7 +81,7 @@
     </div>
 
     <input type="button" value="Exportar" onclick="exportar();">
-
+    <button onclick="delete_pond(3);">borrar el 3</button>
     <footer data-role="footer" data-position="fixed">
         <input data-icon="plus" type="button" onclick="IrAagregarPoza();" value="Agregar"/>
         <input data-icon="delete" type="button" onclick="cerrarSesion();" value="Cerrar Sesion"/>
@@ -101,15 +103,21 @@
         <label for="longitud_poza_alta">Longitud:</label>
         <input type="text" id="longitud_poza_alta" disabled/>
 
-        <input type="button" onclick="obtenerLocalizacion();" value="Obtener Posicion"/>
+        <input type="button" onclick="obtenerLocalizacion();"
+               value="Obtener Posicion"/>
+
+        <div id="map" style="height: 25vh; width: 10vw;"></div>
+
 
         <p>Haga click en el boton vol+ para elegir una imagen de su biblioteca</p>
         <img id="mi_img" src=""/>
     </div>
 
     <footer data-role="footer" data-position="fixed">
-        <input data-icon="check" type="button" value="Guardar" onclick="guargarDatosPoza();"/>
-        <input data-icon="delete" type="button" onclick="cancelar();" value="Cancelar"/>
+        <input data-icon="check" type="button" value="Guardar"
+               onclick="guargarDatosPoza();"/>
+        <input data-icon="delete" type="button" onclick="cancelar();"
+               value="Cancelar"/>
     </footer>
 </section>
 

@@ -10,7 +10,7 @@ function mostrarValores() {
     alert("LocalStorage: " + localStorage.length + '\n' + 'passRegistrada: ' + localStorage.getItem("passRegistrada") + '\n' + 'password: ' + localStorage.getItem("password"));
 }
 
-//Ingresar a con la contrase�a registrada anteriormente
+//Ingresar a con la contraseña registrada anteriormente
 function entrar(){
         var usuario_password = document.getElementById("usuario_password").value;
         var password = localStorage.getItem("password");

@@ -2,7 +2,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 var filesystem = null;
 var pathContext = "proyecto/";
 var folderName = "proyecto";
-
+var firstTime = true;
 
 //En este onDevice hay muchas cosas q se usan pero no ce si se pueden hacer otros onDevice o q 
 //lo que pude quitar lo quite pero hay cosas que deje alla
@@ -15,7 +15,7 @@ function onDeviceReady() {
     destinationType = navigator.camera.DestinationType;
 
     //Verificamos la contrase�a ya fue registrada o todavia
-    if (localStorage.getItem("passRegistrada") < 1) {
+    if (localStorage.getItem("passRegistrada") != 1) {
         localStorage.setItem("passRegistrada", 0);
     }
 
@@ -35,7 +35,10 @@ function onDeviceReady() {
     if (localStorage.getItem("passRegistrada") == 1) {
         document.getElementById("regBtn").style.display = 'none';
     }
-
+    if (firstTime) {
+        initDataBase();
+        firstTime = false;
+    }
 }
 
 //Asignamos la funcion para escoger la imagen cunado se presione el boton volumeup
@@ -51,6 +54,13 @@ function onVolumeUpKeyDown() {
 //Se selecciona la imagen y se sustituye 
 function selectPictureSuccess(imageData) {
     var img = document.getElementById("mi_img");
+    var path_image = decodeURIComponent(imageData);
+    if (path_image.indexOf("providers") > -1) {
+        path_image = "content://media/external/images/media/" +
+            path_image.split(":")[2];
+    }
+    window.localStorage.setItem("photo", path_image);
+
     img.src = imageData;
 }
 
