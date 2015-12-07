@@ -34,16 +34,16 @@ function initMap(position) {
 }
 
 function draw_map(cords_latitude, cords_longitude) {
-    var myLatLng = {
+    var positions = {
         lat: cords_latitude,
         lng: cords_longitude
     };
 
     // Create a map object and specify the DOM element for display.
     var watch_map = new google.maps.Map(document.getElementById("mapaPoza"), {
-        center: myLatLng,
-        scrollwheel: false,
-        zoom: 15
+        zoom: 8,
+        center: new google.maps.LatLng(cords_latitude, cords_longitude)
+        //scrollwheel: false
     });
 
     // Create a marker and set its position.
