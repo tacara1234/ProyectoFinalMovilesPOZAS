@@ -4,9 +4,9 @@
     <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css"/>
     <link rel="stylesheet" href="css/estilo.css"/>
     <script src="cordova.js"></script>
-    <script src="js/libs/google-maps.js"></script>
     <script src="js/libs/jquery-2.1.4.min.js"></script>
     <script src="js/libs/jquery.mobile-1.4.5.min.js"></script>
+    <script src="js/libs/google-maps.js"></script>
     <script src="js/Geolocation.js"></script>
     <script src="js/database.js"></script>
     <script src="js/LocalStorage.js"></script>
@@ -84,9 +84,8 @@
         </div>
     </div>
 
-    <div id="popups">
+    <div id="popups"></div>
 
-    </div>
 
     <input type="button" value="Exportar" onclick="exportar();">
     <footer data-role="footer" data-position="fixed">
@@ -135,17 +134,25 @@
     </header>
 
     <div data-role="content">
-        <label for="nombre_poza_ver">Poza: </label>
-        <input type="text" id="nombre_poza_ver" disabled/>
+        <table>
+            <tbody>
+            <tr>
+                <td><label for="nombre_poza_ver">Nombre de la Poza: </label></td>
+                <td><input type="text" id="nombre_poza_ver" disabled/></td>
+            </tr>
+            <tr>
+                <td><label for="latitud_poza_ver">Latitud:</label></td>
+                <td><input type="text" id="latitud_poza_ver" disabled/></td>
+            </tr>
+            <tr>
+                <td><label for="longitud_poza_ver">Longitud:</label></td>
+                <td><input type="text" id="longitud_poza_ver" disabled/></td>
+            </tr>
+            </tbody>
+        </table>
 
-        <label for="latitud_poza_ver">Latitud:</label>
-        <input type="text" id="latitud_poza_ver" disabled/>
 
-        <label for="longitud_poza_ver">Longitud:</label>
-        <input type="text" id="longitud_poza_ver" disabled/>
-
-        <div id="mapaPoza">
-        </div>
+        <div id="mapaPoza" style="height: 45%; width: 100%; display: block; !important;"></div>
           
     </div>
 

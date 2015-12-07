@@ -7,11 +7,11 @@ var db_version = "3.0";
 function initDataBase() {
 
     var db = window.openDatabase(db_name, db_version, db_name, 200000);
-    db.transaction(populateDB, errorDB, successDB);
+    db.transaction(createDB, errorDB, successDB);
 }
 
-function populateDB(tx) {
-    tx.executeSql('DROP TABLE IF EXISTS ponds');
+function createDB(tx) {
+    //tx.executeSql('DROP TABLE IF EXISTS ponds');
     tx.executeSql('CREATE TABLE IF NOT EXISTS ponds (id INTEGER' +
         ' PRIMARY KEY AUTOINCREMENT NOT NULL, latitude, altitude, name, path_image)');
     //Lo siguiente son datos dummy, si los queremos solo descomentamos lo sig:
@@ -92,10 +92,11 @@ function save_new_pond(tx) {
     window.location.href = "#listaPozas";
     limpiar_campos();
 }
-/*
- Cuando quierar borrar, esta función vas a llamar. Solo le pasas el id y ya.
- */
 
+/**
+ * Cuando quieras borrar una poza, esta función vas a llamar.
+ * Solo le pasas el id y ya.
+ */
 var id_pond_to_delete;
 function delete_pond(pond_id) {
     id_pond_to_delete = pond_id;
@@ -107,4 +108,32 @@ function delete_pond(pond_id) {
 function delete_from_db(tx) {
     tx.executeSql('DELETE FROM ponds WHERE id=?', [id_pond_to_delete]);
 }
+
+/**
+ * Para ver una poza, esta función vas a llamar.
+ * Solo le pasas el id.
+ */
+var id_pond;
+function get_pond(id) {
+    id_pond = id;
+    var db = window.openDatabase(db_name, db_version, db_name, 200000);
+    db.transaction(get_pond_from_db, errorDB);
+    window.location.href = "#verPoza";
+}
+
+function get_pond_from_db(tx) {
+    tx.executeSql('SELECT * FROM ponds WHERE id=?',
+        [id_pond], querySelectSuccess, errorDB);
+
+}
+
+function querySelectSuccess(tx, results) {
+    document.getElementById("nombre_poza_ver").value = results.rows.item(0).name;
+    document.getElementById("latitud_poza_ver").value = results.rows.item(0).latitude;
+    document.getElementById("longitud_poza_ver").value = results.rows.item(0).altitude;
+    draw_map(results.rows.item(0).latitude, results.rows.item(0).altitude);
+}
+
+
+
 
