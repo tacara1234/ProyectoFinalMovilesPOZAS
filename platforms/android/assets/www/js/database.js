@@ -115,10 +115,10 @@ function delete_from_db(tx) {
  */
 var id_pond;
 function get_pond(id) {
-    window.location.href = "#verPoza";
     id_pond = id;
     var db = window.openDatabase(db_name, db_version, db_name, 200000);
-    db.transaction(get_pond_from_db);
+    db.transaction(get_pond_from_db, errorDB);
+    window.location.href = "#verPoza";
 }
 
 function get_pond_from_db(tx) {
@@ -126,11 +126,6 @@ function get_pond_from_db(tx) {
         [id_pond], querySelectSuccess, errorDB);
 
 }
-
-function errorDB2(err) {
-    alert("Error Al procesar la sentencia: " + err.code + ", " + err.message);
-}
-
 
 function querySelectSuccess(tx, results) {
     document.getElementById("nombre_poza_ver").value = results.rows.item(0).name;
