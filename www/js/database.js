@@ -53,14 +53,16 @@ function querySuccess(tx, results) {
 
 function generarCard(i, results){
     var string="";
+    var id = results.rows.item(i).id;
         string += "<div class='nd2-card'>";
         string += "<div class='card-action'>";
         string += "<div class='card-supporting-text'>"+ "ID : "+ results.rows.item(i).id+"</div>";
         string += "<div class='card-supporting-text'>"+ "Nombre : " + results.rows.item(i).name+"</div>";
         string += "<div class='row between-xs'>";
         string += "<div class='col-xs-12 align-right'>";
-        string += "<a href='#' class='ui-btn ui-btn-inline ui-btn-fab'><i class='zmdi zmdi-delete'></i></a>" +
-            "<a href='#' class='ui-btn ui-btn-inline ui-btn-fab'><i class='zmdi zmdi-edit'></i></a>" + "</div></div>";
+        string += "<a href='#' class='ui-btn ui-btn-inline ui-btn-fab' onclick='delete_pond("+id+")" + '\'' + ";><i class='zmdi zmdi-delete'></i></a>" +
+            "<a href='#' class='ui-btn ui-btn-inline ui-btn-fab' onclick='get_pond("+id+")" + '\'' + ";><i class='zmdi zmdi-eye'></i></a>" +
+            "<a href='#' class='ui-btn ui-btn-inline ui-btn-fab' ><i class='zmdi zmdi-edit'></i></a>" + "</div></div></div></div>";
         string += "</div></div>";
     return string;
 }
