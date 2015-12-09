@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="css/nativedroid2.css"/>
     <link rel="stylesheet" href="css/nativedroid2.color.cyan.css"/>
     <link rel="stylesheet" href="css/espacios.css"/>
+    <link rel="stylesheet" href="css/estilo.css"/>
+
 
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes"/>
@@ -45,6 +47,7 @@
 
     <header data-role="header" data-position="fixed" class="wow fadeInDown" data-wow-delay="0.2s">
         <a href="#" class="ui-btn ui-btn-left wow fadeIn" data-wow-delay='0.8s'><i class="zmdi zmdi-gps-dot"></i></a>
+
         <h1 class="wow fadeIn" data-wow-delay='0.4s'>Bienvenido</h1>
     </header>
     <!--Los archivos que se listen se les debe de poder hacer click y
@@ -53,14 +56,15 @@
     <div data-role="content" class="centerPrincipal">
 
         <div class="align-center">
-            <img  class="logoSize" src="img/pozas.png" width="XXpx" height="YYpx" alt="descripcion de la imagen">
+            <img class="logoSize" src="img/pozas.png" width="XXpx" height="YYpx" alt="descripcion de la imagen">
         </div>
 
-        <label for="usuario_password" ><span class="fontSize"> Contraseña:</span></label>
+        <label for="usuario_password"><span class="fontSize"> Contraseña:</span></label>
 
-        <input  type="password" id="usuario_password"  data-clear-btn="true"/>
+        <input type="password" id="usuario_password" data-clear-btn="true"/>
 
-        <a onclick="entrar();" data-role="button" data-inline="true" class="ui-btn ui-btn-raised clr-primary " >Entrar</a>
+        <a onclick="entrar();" data-role="button" data-inline="true"
+           class="ui-btn ui-btn-raised clr-primary ">Entrar</a>
 
     </div>
 
@@ -114,8 +118,9 @@
     ​
     <div data-role="content">
         <div id="divListPonds"></div>
-         <a data-role="button" onclick="exportar();" class="ui-btn ui-btn-raised clr-primary"><i class="zmdi zmdi-download"></i> Exportar</a>
-       </div>
+        <a data-role="button" onclick="exportar();" class="ui-btn ui-btn-raised clr-primary"><i
+                class="zmdi zmdi-download"></i> Exportar</a>
+    </div>
     ​
     <div id="popups"></div>
     ​
@@ -129,7 +134,7 @@
     </a>
 
     <footer data-role="footer" data-position="fixed">
-        <a data-role="button" data-icon="delete" type="button" onclick="cerrarSesion();" >Cerrar Sesion</a>
+        <a data-role="button" data-icon="delete" type="button" onclick="cerrarSesion();">Cerrar Sesion</a>
     </footer>
 </section>
 
@@ -149,17 +154,18 @@
         <label for="longitud_poza_alta">Longitud:</label>
         <input type="text" id="longitud_poza_alta" disabled/>
 
-        <a type="button" onclick="obtenerLocalizacion();" class="ui-btn ui-btn-raised clr-primary"><i class="zmdi zmdi-gps"></i> Obtener Posicion</a>
+        <a type="button" onclick="obtenerLocalizacion();" class="ui-btn ui-btn-raised clr-primary"><i
+                class="zmdi zmdi-gps"></i> Obtener Posicion</a>
 
-        <div id="map" style="height: 25vh; width: 100%;"></div>
+        <div id="map" class="block-image"></div>
 
 
         <p>Haga click en el boton vol+ para elegir una imagen de su biblioteca</p>
-        <img id="mi_img" src=""/>
+        <img id="mi_img" src="" class="block-image"/>
     </div>
 
     <footer data-role="footer" data-position="fixed">
-        <a data-icon="check" type="button"  onclick="guargarDatosPoza();"> Guardar</a>
+        <a data-icon="check" type="button" onclick="guargarDatosPoza();"> Guardar</a>
         <a data-icon="delete" type="button" onclick="cancelar();">Cancelar</a>
     </footer>
 </section>
@@ -188,8 +194,8 @@
             </tbody>
         </table>
 
-        <div id="mapaPoza" style="height: 45%; width: 100%; display: block; !important;"></div>
-
+        <div id="mapaPoza" class="block-image"></div>
+        <img src="" alt="image" id="pond-to-see" class="block-image">
     </div>
 
 
@@ -206,6 +212,10 @@
     </header>
 
     <div data-role="content">
+
+        <label for="id-pond-editing">Número de poza:</label>
+        <input type="number" id="id-pond-editing" disabled/>
+
         <label for="nombre_poza_modif">Poza:</label>
         <input type="text" id="nombre_poza_modif"/>
 
@@ -216,11 +226,20 @@
         <input type="text" id="longitud_poza_modif"/>
 
 
+        <a type="button" onclick="obtenerLocalizacion();" class="ui-btn ui-btn-raised clr-primary"><i
+                class="zmdi zmdi-gps"></i> Obtener Posicion</a>
+
+        <div id="map-edit" class="block-image"></div>
+
+
+        <p>Haga click en el boton vol+ para elegir una imagen de su biblioteca</p>
+        <img id="img-from-library" src="" class="block-image"/>
+
     </div>
 
     <footer data-role="footer" data-position="fixed">
-        <a data-icon="check" type="button"  onclick="guardarCambios();">Guardar</a>
-        <a data-icon="delete" type="button" onclick="cancelar();" >Cancelar</a>
+        <a data-icon="check" type="button" onclick="edit_data_pond()">Guardar poza</a>
+        <a data-icon="delete" type="button" onclick="cancelar();">Cancelar</a>
     </footer>
 </section>
 
