@@ -1,5 +1,10 @@
-#mi_img{
-    width:70%;
-    height:63%;
+/*#mi_img {*/
+/*width: 70%;*/
+/*height: 63%;*/
 
+/*}*/
+
+.block-image {
+    height: 95%;
+    width: 100%;
 }

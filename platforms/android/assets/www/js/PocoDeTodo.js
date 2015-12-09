@@ -53,7 +53,12 @@ function onVolumeUpKeyDown() {
 
 //Se selecciona la imagen y se sustituye 
 function selectPictureSuccess(imageData) {
-    var img = document.getElementById("mi_img");
+    var img;
+    if (is_editable)
+        img = document.getElementById("img-from-library");
+    else
+        img = document.getElementById("mi_img");
+
     var path_image = decodeURIComponent(imageData);
     if (path_image.indexOf("providers") > -1) {
         path_image = "content://media/external/images/media/" +

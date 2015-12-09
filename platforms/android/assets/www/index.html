@@ -1,9 +1,34 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css"/>
+    <link rel="stylesheet" href="vendor/waves/waves.min.css"/>
+    <link rel="stylesheet" href="vendor/wow/animate.css"/>
+    <link rel="stylesheet" href="css/nativedroid2.css"/>
+    <link rel="stylesheet" href="css/nativedroid2.color.cyan.css"/>
+    <link rel="stylesheet" href="css/espacios.css"/>
     <link rel="stylesheet" href="css/estilo.css"/>
+
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+
     <script src="cordova.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+    <script src="vendor/waves/waves.min.js"></script>
+    <script src="vendor/wow/wow.min.js"></script>
+    <script src="js/nativedroid2.js"></script>
+    <script src="nd2settings.js"></script>
+
+
     <script src="js/libs/jquery-2.1.4.min.js"></script>
     <script src="js/libs/jquery.mobile-1.4.5.min.js"></script>
     <script src="js/libs/google-maps.js"></script>
@@ -20,28 +45,41 @@
 <!----------------------------------LOGIN------------------------------------------------------->
 <section data-role="page" id="index">
 
-    <header data-role="header">
-        <h1>Bienvenido</h1>
-    </header>
+    <header data-role="header" data-position="fixed" class="wow fadeInDown" data-wow-delay="0.2s">
+        <a href="#" class="ui-btn ui-btn-left wow fadeIn" data-wow-delay='0.8s'><i class="zmdi zmdi-gps-dot"></i></a>
 
+        <h1 class="wow fadeIn" data-wow-delay='0.4s'>Bienvenido</h1>
+    </header>
     <!--Los archivos que se listen se les debe de poder hacer click y
       mostrar un mensaje para eliminarlos o editarlos-->
 
-    <div data-role="content">
+    <div data-role="content" class="centerPrincipal">
 
-        <label for="usuario_password">Contraseña:</label>
-        <input type="password" id="usuario_password"/>
-        <input type="button" value="Entrar" onclick="entrar();"/>
+        <div class="align-center">
+            <img class="logoSize" src="img/pozas.png" width="XXpx" height="YYpx" alt="descripcion de la imagen">
+        </div>
+
+        <label for="usuario_password"><span class="fontSize"> Contraseña:</span></label>
+
+        <input type="password" id="usuario_password" data-clear-btn="true"/>
+
+        <a onclick="entrar();" data-role="button" data-inline="true"
+           class="ui-btn ui-btn-raised clr-primary ">Entrar</a>
+
     </div>
 
     <footer data-role="footer" data-position="fixed">
-        <a id="regBtn" data-role="button" data-transition="pop" href="#registrarse">Registrar Contraseña</a>
+        <a id="regBtn" data-role="button" data-transition="pop" href="#registrarse">
+            <i class="zmdi zmdi-lock"></i>
+            Registrar Contraseña</a>
         <!--Links de Prueba-->
         <!--<a data-role="button" data-transition="pop" href="#altaPoza">Alta</a>-->
         <!--<a data-role="button" data-transition="pop" href="#listaPozas">Lista</a>-->
         <!--<a data-role="button" data-transition="pop" href="#verPoza">Registrarse</a>-->
         <!--<a data-role="button" data-transition="pop" href="#modificarPoza">Modificar</a>-->
-        <a data-role="button" data-transition="pop" href="#registrarse">Configuraciones</a>
+        <a data-role="button" data-transition="pop" href="#registrarse">
+            <i class="zmdi zmdi-wrench"></i>
+            Configuraciones</a>
 
     </footer>
 </section>
@@ -52,7 +90,7 @@
         <h1>Registro Constraseña</h1>
     </header>
 
-    <div data-role="content">
+    <div data-role="content" class="centerSecondary">
         <label for="password_alta">Contraseña: </label>
         <input type="password" id="password_alta" required/>
 
@@ -62,7 +100,7 @@
         <div id="msg-warning" style="display: none; background-color: red; color:white;">
             Las contraseñas no coinciden
         </div>
-        <input type="button" value="Aceptar" onclick="guardarPassword();"/>
+        <a type="button" onclick="guardarPassword();" class="ui-btn ui-btn-raised clr-primary"> Aceptar</a>
         <!--<input type="button" value="limpirarLocal" onclick="limpiarLocalStorage();"/>-->
         <!--<input type="button" value="mostarValores" onclick="mostrarValores();"/>-->
     </div>
@@ -77,20 +115,26 @@
     <header data-role="header">
         <h1>Pozas</h1>
     </header>
-
+    ​
     <div data-role="content">
-        <div id="divListPonds">
-
-        </div>
+        <div id="divListPonds"></div>
+        <a data-role="button" onclick="exportar();" class="ui-btn ui-btn-raised clr-primary"><i
+                class="zmdi zmdi-download"></i> Exportar</a>
     </div>
-
+    ​
     <div id="popups"></div>
+    ​
+    <a data-rel="popup" onclick="IrAagregarPoza();" data-position-to="window" data-transition="pop"
+       class="ui-btn    	ui-btn-inline
+							ui-btn-fab
+							ui-btn-fab-bottom
+							ui-btn-raised
+							clr-primary">
+        <i class='zmdi zmdi-plus zmd-2x'></i>
+    </a>
 
-    <!--<input type="button" value="Ver poza 1" onclick="get_pond(Number(1));">-->
-    <input type="button" value="Exportar" onclick="exportar();">
     <footer data-role="footer" data-position="fixed">
-        <input data-icon="plus" type="button" onclick="IrAagregarPoza();" value="Agregar"/>
-        <input data-icon="delete" type="button" onclick="cerrarSesion();" value="Cerrar Sesion"/>
+        <a data-role="button" data-icon="delete" type="button" onclick="cerrarSesion();">Cerrar Sesion</a>
     </footer>
 </section>
 
@@ -106,24 +150,23 @@
 
         <label for="latitud_poza_alta">Latitud:</label>
         <input type="text" id="latitud_poza_alta" disabled/>
+        <br>
         <label for="longitud_poza_alta">Longitud:</label>
         <input type="text" id="longitud_poza_alta" disabled/>
 
-        <input type="button" onclick="obtenerLocalizacion();"
-               value="Obtener Posicion"/>
+        <a type="button" onclick="obtenerLocalizacion();" class="ui-btn ui-btn-raised clr-primary"><i
+                class="zmdi zmdi-gps"></i> Obtener Posicion</a>
 
-        <div id="map" style="height: 25vh; width: 10vw;"></div>
+        <div id="map" class="block-image"></div>
 
 
         <p>Haga click en el boton vol+ para elegir una imagen de su biblioteca</p>
-        <img id="mi_img" src=""/>
+        <img id="mi_img" src="" class="block-image"/>
     </div>
 
     <footer data-role="footer" data-position="fixed">
-        <input data-icon="check" type="button" value="Guardar"
-               onclick="guargarDatosPoza();"/>
-        <input data-icon="delete" type="button" onclick="cancelar();"
-               value="Cancelar"/>
+        <a data-icon="check" type="button" onclick="guargarDatosPoza();"> Guardar</a>
+        <a data-icon="delete" type="button" onclick="cancelar();">Cancelar</a>
     </footer>
 </section>
 
@@ -151,14 +194,13 @@
             </tbody>
         </table>
 
-
-        <div id="mapaPoza" style="height: 45%; width: 100%; display: block; !important;"></div>
-
+        <div id="mapaPoza" class="block-image"></div>
+        <img src="" alt="image" id="pond-to-see" class="block-image">
     </div>
 
 
     <footer data-role="footer" data-position="fixed">
-        <input data-icon="back" type="button" onclick="cancelar();" value="Cancelar"/>
+        <a data-icon="back" type="button" onclick="cancelar();">Cancelar</a>
     </footer>
 </section>
 
@@ -170,6 +212,10 @@
     </header>
 
     <div data-role="content">
+
+        <label for="id-pond-editing">Número de poza:</label>
+        <input type="number" id="id-pond-editing" disabled/>
+
         <label for="nombre_poza_modif">Poza:</label>
         <input type="text" id="nombre_poza_modif"/>
 
@@ -180,11 +226,20 @@
         <input type="text" id="longitud_poza_modif"/>
 
 
+        <a type="button" onclick="obtenerLocalizacion();" class="ui-btn ui-btn-raised clr-primary"><i
+                class="zmdi zmdi-gps"></i> Obtener Posicion</a>
+
+        <div id="map-edit" class="block-image"></div>
+
+
+        <p>Haga click en el boton vol+ para elegir una imagen de su biblioteca</p>
+        <img id="img-from-library" src="" class="block-image"/>
+
     </div>
 
     <footer data-role="footer" data-position="fixed">
-        <input data-icon="check" type="button" value="Guardar" onclick="guardarCambios();"/>
-        <input data-icon="delete" type="button" onclick="cancelar();" value="Cancelar"/>
+        <a data-icon="check" type="button" onclick="edit_data_pond()">Guardar poza</a>
+        <a data-icon="delete" type="button" onclick="cancelar();">Cancelar</a>
     </footer>
 </section>
 
