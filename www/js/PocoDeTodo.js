@@ -27,9 +27,11 @@ function onDeviceReady() {
     // Start the app by requesting a FileSystem (if the browser supports the API)
     if (window.requestFileSystem) {
         initFileSystem();
-
+        //alert("Si se pueden escribir archivos");
         window.requestFileSystem(LocalFileSystem.PERSISTENT,
                 0, onFileSystemSuccess, fail);
+    }else{
+       // alert("no se pueden escribir archivos");
     }
 
     //si la contrase�a ya fue registrada quitamos el boton para registrarnos
