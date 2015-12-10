@@ -8,6 +8,23 @@
     <feature name="Camera">
         <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
     </feature>
+    <feature name="WifiWizard">
+        <param name="android-package" value="com.pylonproducts.wifiwizard.WifiWizard" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="Vibration">
+        <param name="android-package" value="org.apache.cordova.vibration.Vibration" />
+    </feature>
+    <feature name="File">
+        <param name="android-package" value="org.apache.cordova.file.FileUtils" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="PDialog">
+        <param name="android-package" value="io.github.pwlin.cordova.plugins.pdialog.PDialog" />
+    </feature>
+    <feature name="GeofencePlugin">
+        <param name="android-package" value="com.cowbell.cordova.geofence.GeofencePlugin" />
+    </feature>
     <allow-intent href="market:*" />
     <name>pozas</name>
     <description>

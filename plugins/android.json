@@ -15,6 +15,22 @@
                         {
                             "xml": "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"WifiWizard\"><param name=\"android-package\" value=\"com.pylonproducts.wifiwizard.WifiWizard\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Vibration\"><param name=\"android-package\" value=\"org.apache.cordova.vibration.Vibration\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"File\"><param name=\"android-package\" value=\"org.apache.cordova.file.FileUtils\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"PDialog\"><param name=\"android-package\" value=\"io.github.pwlin.cordova.plugins.pdialog.PDialog\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -32,6 +48,56 @@
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+                            "count": 2
+                        }
+                    ],
+                    "/manifest/application": [
+                        {
+                            "xml": "<service android:exported=\"false\" android:label=\"@string/app_name\" android:name=\"com.cowbell.cordova.geofence.ReceiveTransitionsIntentService\"></service>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<receiver android:name=\"com.cowbell.cordova.geofence.BootReceiver\"><intent-filter><action android:name=\"android.intent.action.BOOT_COMPLETED\" /></intent-filter></receiver>",
+                            "count": 1
+                        }
+                    ],
+                    "/manifest": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.VIBRATE\" />",
+                            "count": 2
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\" />",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"GeofencePlugin\"><param name=\"android-package\" value=\"com.cowbell.cordova.geofence.GeofencePlugin\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -48,7 +114,29 @@
         },
         "cordova-plugin-camera": {
             "PACKAGE_NAME": "com.example.pozas"
+        },
+        "cordova-plugin-geofence": {
+            "PACKAGE_NAME": "com.example.pozas"
+        },
+        "com.pylonproducts.wifiwizard": {
+            "PACKAGE_NAME": "com.example.pozas"
+        },
+        "cordova-plugin-vibration": {
+            "PACKAGE_NAME": "com.example.pozas"
+        },
+        "cordova-plugin-blob-constructor-polyfill": {
+            "PACKAGE_NAME": "com.example.pozas"
+        },
+        "org.apache.cordova.file": {
+            "PACKAGE_NAME": "com.example.pozas"
+        },
+        "cordova-plugin-pdialog": {
+            "PACKAGE_NAME": "com.example.pozas"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "es6-promise-plugin": {
+            "PACKAGE_NAME": "com.example.pozas"
+        }
+    }
 }

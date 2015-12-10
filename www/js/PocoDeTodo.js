@@ -10,6 +10,8 @@ var firstTime = true;
 
 function onDeviceReady() {
     //Agregamos el evento volumeupbutton (El chiste es que solo se pueda usar cuando estemos en alta)
+    window.geofence.initialize();
+
     document.addEventListener("volumeupbutton", onVolumeUpKeyDown, false);
     pictureSource = navigator.camera.PictureSourceType;
     destinationType = navigator.camera.DestinationType;
@@ -21,13 +23,13 @@ function onDeviceReady() {
 
 
     window.requestFileSystem = window.requestFileSystem
-        || window.webkitRequestFileSystem;
+            || window.webkitRequestFileSystem;
     // Start the app by requesting a FileSystem (if the browser supports the API)
     if (window.requestFileSystem) {
         initFileSystem();
 
         window.requestFileSystem(LocalFileSystem.PERSISTENT,
-            0, onFileSystemSuccess, fail);
+                0, onFileSystemSuccess, fail);
     }
 
     //si la contrase�a ya fue registrada quitamos el boton para registrarnos
@@ -62,7 +64,7 @@ function selectPictureSuccess(imageData) {
     var path_image = decodeURIComponent(imageData);
     if (path_image.indexOf("providers") > -1) {
         path_image = "content://media/external/images/media/" +
-            path_image.split(":")[2];
+                path_image.split(":")[2];
     }
     window.localStorage.setItem("photo", path_image);
 
@@ -84,11 +86,11 @@ function onFileSystemSuccess(filesystem) {
     // In here, we put where the folder is. If it is found, then it
     // continues to getDirSuccess
     filesystem.root.getDirectory(folderName,
-        {
-            create: false, exclusive: false
-        },
-        getDirSuccess,
-        fail);
+            {
+                create: false, exclusive: false
+            },
+    getDirSuccess,
+            fail);
 }
 
 function getDirSuccess(dirEntry) {
@@ -106,19 +108,19 @@ function readerSuccess(entries) {
 
     for (i = 0; i < entries.length; i++) {
         listado += "<li data-icon='gear'><a href='#opciones" + i +
-            "' data-rel='popup' data-position-to='window' " +
-            "data-transition='pop'>" + entries[i].name +
-            "</a></li>";
+                "' data-rel='popup' data-position-to='window' " +
+                "data-transition='pop'>" + entries[i].name +
+                "</a></li>";
         var options = "opciones" + i;
         var deleteOperation = "delop" + i;
         var editOperation = "editop" + i;
         popUps += "<div data-role='popup' id='" + options + "' data-theme='a' data-overlay-theme='b' " +
-            "class='ui-content' style='max-width:340px; padding-bottom:2em;'> " +
-            "<h3>Escoja la operacion</h3>" +
-            "<input id='" + deleteOperation + "' type='button' data-icon='delete' " +
-            "value='eliminar' />" +
-            "<input id='" + editOperation + "' type='button' data-icon='edit' " +
-            "value='modificar' /></div>";
+                "class='ui-content' style='max-width:340px; padding-bottom:2em;'> " +
+                "<h3>Escoja la operacion</h3>" +
+                "<input id='" + deleteOperation + "' type='button' data-icon='delete' " +
+                "value='eliminar' />" +
+                "<input id='" + editOperation + "' type='button' data-icon='edit' " +
+                "value='modificar' /></div>";
 
 
     }
@@ -130,9 +132,9 @@ function readerSuccess(entries) {
         (function (counter) {
             //It is added the delete operation as 'onclick' in each link
             document.getElementById('delop' + counter).
-            addEventListener("click", function () {
-                deleteFile(entries[counter].name);
-            });
+                    addEventListener("click", function () {
+                        deleteFile(entries[counter].name);
+                    });
         }(counter));
 
     }
@@ -141,9 +143,9 @@ function readerSuccess(entries) {
         (function (k) {
             //It is added the the function that will set the info from the read file, in the view
             document.getElementById('editop' + k).
-            addEventListener("click", function () {
-                setInfoFromFile(entries[k].name);
-            });
+                    addEventListener("click", function () {
+                        setInfoFromFile(entries[k].name);
+                    });
         }(k));
 
     }
@@ -154,7 +156,7 @@ function actualizarLista(datos) {
     if (!listcreated) {
         var divList = $("#divList");
         divList.append("<ul id='lista' data-role='listview' data-inset='true' data-filter='true' " +
-            "data-filter-placeholder='buscar..'></ul>");
+                "data-filter-placeholder='buscar..'></ul>");
         listCreated = true;
         divList.trigger("create");
     }
@@ -196,24 +198,24 @@ function saveEditedFile() {
     var path = pathContext + filename;
 
     filesystem.root.getFile(
-        path,
-        {
-            create: false
-        },
-        function (fileEntry) {
-            // Create a FileWriter object for our FileEntry
-            // (with the given name of the file).
-            fileEntry.createWriter(function (fileWriter) {
-                fileWriter.seek(0); //Start write position at the beginning of the file
-                var fileParts = [content];
-                var contentBlob = new Blob(fileParts, {
-                    type: 'text/html'
-                });
-                fileWriter.write(contentBlob);
-
-            }, errorHandler);
+            path,
+            {
+                create: false
+            },
+    function (fileEntry) {
+        // Create a FileWriter object for our FileEntry
+        // (with the given name of the file).
+        fileEntry.createWriter(function (fileWriter) {
+            fileWriter.seek(0); //Start write position at the beginning of the file
+            var fileParts = [content];
+            var contentBlob = new Blob(fileParts, {
+                type: 'text/html'
+            });
+            fileWriter.write(contentBlob);
 
         }, errorHandler);
+
+    }, errorHandler);
     alert("Archivo Modificado");
 }
 
@@ -253,16 +255,16 @@ function deleteFile(filename) {
 
     var path = pathContext + filename;
     filesystem.root.getFile(path,
-        {
-            create: false
-        },
-        function (fileEntry) {
-            fileEntry.remove(function () {
-                alert("Archivo " + filename + " Eliminado");
-                window.location.href = "index.html";
-            }, errorHandler);
-
+            {
+                create: false
+            },
+    function (fileEntry) {
+        fileEntry.remove(function () {
+            alert("Archivo " + filename + " Eliminado");
+            window.location.href = "index.html";
         }, errorHandler);
+
+    }, errorHandler);
 }
 
 function fail() {

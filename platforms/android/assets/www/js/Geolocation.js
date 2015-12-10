@@ -1,5 +1,9 @@
+
+function enableWifi2() {
+    WifiWizard.setWifiEnabled(true, wifiEnableSuccess2, wifiEnableFail2);
+}
 //Obtenemos la localizacion
-function obtenerLocalizacion() {
+function wifiEnableSuccess2() {
     var options = {
         maximumAge: 5000,
         timeout: 5000,
@@ -7,6 +11,10 @@ function obtenerLocalizacion() {
     };
     navigator.geolocation.getCurrentPosition(initMap, geolocationError, options);
 
+}
+
+function wifiEnableFail2(){
+    alert("No se pudo encender el wifi");
 }
 
 function initMap(position) {
