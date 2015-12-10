@@ -73,14 +73,10 @@
         <a id="regBtn" data-role="button" data-transition="pop" href="#registrarse">
             <i class="zmdi zmdi-lock"></i>
             Registrar Contraseña</a>
-        <!--Links de Prueba-->
-        <!--<a data-role="button" data-transition="pop" href="#altaPoza">Alta</a>-->
-        <!--<a data-role="button" data-transition="pop" href="#listaPozas">Lista</a>-->
-        <!--<a data-role="button" data-transition="pop" href="#verPoza">Registrarse</a>-->
-        <!--<a data-role="button" data-transition="pop" href="#modificarPoza">Modificar</a>-->
-        <a data-role="button" data-transition="pop" href="#registrarse">
+
+        <a id="btnChangePassword" data-role="button" data-transition="pop" href="#cambiopass">
             <i class="zmdi zmdi-wrench"></i>
-            Configuraciones</a>
+            Cambiar contraseña</a>
 
     </footer>
 </section>
@@ -102,8 +98,34 @@
             Las contraseñas no coinciden
         </div>
         <a type="button" onclick="guardarPassword();" class="ui-btn ui-btn-raised clr-primary"> Aceptar</a>
-        <!--<input type="button" value="limpirarLocal" onclick="limpiarLocalStorage();"/>-->
-        <!--<input type="button" value="mostarValores" onclick="mostrarValores();"/>-->
+    </div>
+
+    <footer data-role="footer" data-position="fixed">
+        <input data-icon="delete" type="button" onclick="window.location.href='#index'" value="cancelar"/>
+    </footer>
+</section>
+
+
+<!----------------------------------CAMBIO DE CONTRASEÑA---------------------------------------------------->
+<section data-role="page" id="cambiopass">
+    <header data-role="header">
+        <h1>Cambiar Constraseña</h1>
+    </header>
+
+    <div data-role="content" class="centerSecondary">
+        <label for="password_cambio_antigua">Contraseña anterior: </label>
+        <input type="password" id="password_cambio_antigua" required/>
+
+        <label for="password_cambio">Nueva contraseña: </label>
+        <input type="password" id="password_cambio" required/>
+
+        <label for="password_cambio_repeticion">Repita la nueva contraseña: </label>
+        <input type="password" id="password_cambio_repeticion" required/>
+
+        <div id="msg-warning-changing-password" style="display: none; background-color: red; color:white;">
+            Las contraseñas no coinciden
+        </div>
+        <a type="button" onclick="change_password();" class="ui-btn ui-btn-raised clr-primary"> Aceptar</a>
     </div>
 
     <footer data-role="footer" data-position="fixed">

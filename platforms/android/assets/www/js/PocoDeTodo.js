@@ -9,6 +9,14 @@ function onDeviceReady() {
     //Agregamos el evento volumeupbutton (El chiste es que solo se pueda usar cuando estemos en alta)
     window.geofence.initialize();
 
+    if (localStorage.getItem("password") == null) {
+        document.getElementById("btnChangePassword").style.display = 'none';
+        document.getElementById("regBtn").style.display = 'block';
+    } else {
+        document.getElementById("btnChangePassword").style.display = 'block';
+        document.getElementById("regBtn").style.display = 'none';
+    }
+
     document.addEventListener("volumeupbutton", onVolumeUpKeyDown, false);
     pictureSource = navigator.camera.PictureSourceType;
     destinationType = navigator.camera.DestinationType;
@@ -28,9 +36,9 @@ function onDeviceReady() {
 
     //si la contrase�a ya fue registrada quitamos el boton para registrarnos
     //Pero ese boton lo quiero sustituir por uno con el que se pueda cambiar la contrase�a
-    if (localStorage.getItem("passRegistrada") == 1) {
-        document.getElementById("regBtn").style.display = 'none';
-    }
+    //if (localStorage.getItem("passRegistrada") == 1) {
+    //    document.getElementById("regBtn").style.display = 'none';
+    //}
     if (firstTime) {
         initDataBase();
         firstTime = false;

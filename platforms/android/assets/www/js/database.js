@@ -148,13 +148,13 @@ function wifiEnableSuccess(id, latitude, longitude, name) {
             geofences.forEach(function (geo) {
                 if (cont % 2 == 0) {
                     //alert('Entro a la poza ');
-                    navigator.vibrate(3000)
+                    navigator.vibrate(3000);
                     //WifiWizard.setWifiEnabled(false, win2, fail);
                     //.setWifiEnabled(true, win2, fail);
                     cont++;
                 } else {
                     //alert('Salio de la poza');
-                    navigator.vibrate(1000)
+                    navigator.vibrate(1000);
                     //WifiWizard.setWifiEnabled(false, win2, fail);
                     //WifiWizard.setWifiEnabled(true, win2, fail);
                     cont++;
