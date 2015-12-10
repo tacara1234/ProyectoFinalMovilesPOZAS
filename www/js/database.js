@@ -12,7 +12,7 @@ function initDataBase() {
 
 function createDB(tx) {
     tx.executeSql('CREATE TABLE IF NOT EXISTS ponds (id INTEGER' +
-            ' PRIMARY KEY AUTOINCREMENT NOT NULL, latitude, altitude, name, path_image)');
+        ' PRIMARY KEY AUTOINCREMENT NOT NULL, latitude, altitude, name, path_image)');
     //tx.executeSql('INSERT INTO ponds (id, latitude, altitude, name, path_image) ' +
     //    'VALUES (1,"55.3","43.7", "Poza 1", "Test Path")');
 }
@@ -55,12 +55,12 @@ function generarCard(i, results) {
     string += "<div class='row between-xs'>";
     string += "<div class='col-xs-12 align-right'>";
     string += "<a href='#' class='ui-btn ui-btn-inline ui-btn-fab' " +
-            "onclick='delete_pond(" + id + ")" + '\'' + ";><i class='zmdi zmdi-delete'></i></a>" +
-            "<a href='#' class='ui-btn ui-btn-inline ui-btn-fab' " +
-            "onclick='get_pond(" + id + ")" + '\'' + ";><i class='zmdi zmdi-eye'></i></a>" +
-            "<a href='#' class='ui-btn ui-btn-inline ui-btn-fab' " +
-            "onclick='select_pond_to_edit(" + id + ")" + '\'' + ";><i class='zmdi zmdi-edit'></i></a>" +
-            "</div></div></div></div>";
+        "onclick='delete_pond(" + id + ")" + '\'' + ";><i class='zmdi zmdi-delete'></i></a>" +
+        "<a href='#' class='ui-btn ui-btn-inline ui-btn-fab' " +
+        "onclick='get_pond(" + id + ")" + '\'' + ";><i class='zmdi zmdi-eye'></i></a>" +
+        "<a href='#' class='ui-btn ui-btn-inline ui-btn-fab' " +
+        "onclick='select_pond_to_edit(" + id + ")" + '\'' + ";><i class='zmdi zmdi-edit'></i></a>" +
+        "</div></div></div></div>";
 
     string += "</div></div>";
     return string;
@@ -70,8 +70,8 @@ function generarCard(i, results) {
 function guargarDatosPoza() {
 
     if ($('#nombre_poza_alta').val() == '' ||
-            $('#latitud_poza_alta').val() == '' ||
-            $('#longitud_poza_alta').val() == '') {
+        $('#latitud_poza_alta').val() == '' ||
+        $('#longitud_poza_alta').val() == '') {
         alert("Llene todos los campos por favor. ");
         return;
     }
@@ -93,10 +93,10 @@ function save_new_pond(tx) {
     var photo_image = window.localStorage.getItem("photo");
 
     tx.executeSql(
-            'INSERT INTO ponds (id, latitude, altitude, name, path_image)' +
-            ' VALUES ( ? , ? , ? , ?, ? )',
-            [id, latitude, longitude, name, photo_image]
-            );
+        'INSERT INTO ponds (id, latitude, altitude, name, path_image)' +
+        ' VALUES ( ? , ? , ? , ?, ? )',
+        [null, latitude, longitude, name, photo_image]
+    );
 
     enableWifi(id, latitude, longitude, name);
 
@@ -148,13 +148,13 @@ function wifiEnableSuccess(id, latitude, longitude, name) {
             geofences.forEach(function (geo) {
                 if (cont % 2 == 0) {
                     //alert('Entro a la poza ');
-                    navigator.vibrate(3000)
+                    navigator.vibrate(3000);
                     //WifiWizard.setWifiEnabled(false, win2, fail);
                     //.setWifiEnabled(true, win2, fail);
                     cont++;
                 } else {
                     //alert('Salio de la poza');
-                    navigator.vibrate(1000)
+                    navigator.vibrate(1000);
                     //WifiWizard.setWifiEnabled(false, win2, fail);
                     //WifiWizard.setWifiEnabled(true, win2, fail);
                     cont++;
@@ -176,8 +176,8 @@ function wifiEnableFail() {
 function edit_data_pond() {
 
     if ($('#nombre_poza_modif').val() == '' ||
-            $('#latitud_poza_modif').val() == '' ||
-            $('#longitud_poza_modif').val() == '') {
+        $('#latitud_poza_modif').val() == '' ||
+        $('#longitud_poza_modif').val() == '') {
         alert("Llene todos los campos por favor. ");
         return;
     }
@@ -190,13 +190,14 @@ function save_edited_pond(tx) {
     var name = document.getElementById("nombre_poza_modif").value;
     var latitude = document.getElementById("latitud_poza_modif").value;
     var longitude = document.getElementById("longitud_poza_modif").value;
+
     var photo_image = window.localStorage.getItem("photo");
 
     tx.executeSql(
-            "UPDATE ponds SET latitude=?, altitude=?, name=?, path_image=? " +
-            "WHERE id=?",
-            [latitude, longitude, name, photo_image, id]
-            );
+        "UPDATE ponds SET latitude=?, altitude=?, name=?, path_image=? " +
+        "WHERE id=?",
+        [latitude, longitude, name, photo_image, id]
+    );
 
 
     window.location.href = "#listaPozas";
@@ -209,6 +210,9 @@ function save_edited_pond(tx) {
  */
 var id_pond_to_delete;
 function delete_pond(pond_id) {
+    if (!confirm("¿Seguro desea eliminar esta poza?"))
+        return;
+
     id_pond_to_delete = pond_id;
 
     window.geofence.remove(id_pond_to_delete);
@@ -258,7 +262,7 @@ function get_pond(id) {
 
 function get_pond_from_db(tx) {
     tx.executeSql('SELECT * FROM ponds WHERE id=?',
-            [id_pond], querySelectSuccess, errorDB);
+        [id_pond], querySelectSuccess, errorDB);
 
 }
 

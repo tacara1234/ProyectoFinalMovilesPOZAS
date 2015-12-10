@@ -1,4 +1,3 @@
-
 function enableWifi2() {
     WifiWizard.setWifiEnabled(true, wifiEnableSuccess2, wifiEnableFail2);
 }
@@ -13,7 +12,7 @@ function wifiEnableSuccess2() {
 
 }
 
-function wifiEnableFail2(){
+function wifiEnableFail2() {
     alert("No se pudo encender el wifi");
 }
 
@@ -36,8 +35,14 @@ function initMap(position) {
         position: myLatLng,
         title: 'Marcador!'
     });
-    document.getElementById("latitud_poza_alta").value = position.coords.latitude;
-    document.getElementById("longitud_poza_alta").value = position.coords.longitude;
+    if (is_editable) {
+        document.getElementById("latitud_poza_modif").value = position.coords.latitude;
+        document.getElementById("longitud_poza_modif").value = position.coords.longitude;
+    } else {
+        document.getElementById("latitud_poza_alta").value = position.coords.latitude;
+        document.getElementById("longitud_poza_alta").value = position.coords.longitude;
+    }
+
 
 }
 
