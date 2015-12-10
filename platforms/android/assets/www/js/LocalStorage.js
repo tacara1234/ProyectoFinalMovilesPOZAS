@@ -41,7 +41,7 @@ function change_password() {
 
 
     if (old_password != localStorage.getItem("password")) {
-        alert("La contraseña antigua que escribió, no coincide con la registrada en el celular")
+        alert("La contraseña antigua que escribió, no coincide con la registrada en el celular");
         return;
     }
     var new_password = document.getElementById("password_cambio").value;

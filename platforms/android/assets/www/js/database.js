@@ -12,7 +12,7 @@ function initDataBase() {
 
 function createDB(tx) {
     tx.executeSql('CREATE TABLE IF NOT EXISTS ponds (id INTEGER' +
-        ' PRIMARY KEY AUTOINCREMENT NOT NULL, latitude, altitude, name, path_image)');
+            ' PRIMARY KEY AUTOINCREMENT NOT NULL, latitude, altitude, name, path_image)');
     //tx.executeSql('INSERT INTO ponds (id, latitude, altitude, name, path_image) ' +
     //    'VALUES (1,"55.3","43.7", "Poza 1", "Test Path")');
 }
@@ -55,12 +55,12 @@ function generarCard(i, results) {
     string += "<div class='row between-xs'>";
     string += "<div class='col-xs-12 align-right'>";
     string += "<a href='#' class='ui-btn ui-btn-inline ui-btn-fab' " +
-        "onclick='delete_pond(" + id + ")" + '\'' + ";><i class='zmdi zmdi-delete'></i></a>" +
-        "<a href='#' class='ui-btn ui-btn-inline ui-btn-fab' " +
-        "onclick='get_pond(" + id + ")" + '\'' + ";><i class='zmdi zmdi-eye'></i></a>" +
-        "<a href='#' class='ui-btn ui-btn-inline ui-btn-fab' " +
-        "onclick='select_pond_to_edit(" + id + ")" + '\'' + ";><i class='zmdi zmdi-edit'></i></a>" +
-        "</div></div></div></div>";
+            "onclick='delete_pond(" + id + ")" + '\'' + ";><i class='zmdi zmdi-delete'></i></a>" +
+            "<a href='#' class='ui-btn ui-btn-inline ui-btn-fab' " +
+            "onclick='get_pond(" + id + ")" + '\'' + ";><i class='zmdi zmdi-eye'></i></a>" +
+            "<a href='#' class='ui-btn ui-btn-inline ui-btn-fab' " +
+            "onclick='select_pond_to_edit(" + id + ")" + '\'' + ";><i class='zmdi zmdi-edit'></i></a>" +
+            "</div></div></div></div>";
 
     string += "</div></div>";
     return string;
@@ -70,8 +70,8 @@ function generarCard(i, results) {
 function guargarDatosPoza() {
 
     if ($('#nombre_poza_alta').val() == '' ||
-        $('#latitud_poza_alta').val() == '' ||
-        $('#longitud_poza_alta').val() == '') {
+            $('#latitud_poza_alta').val() == '' ||
+            $('#longitud_poza_alta').val() == '') {
         alert("Llene todos los campos por favor. ");
         return;
     }
@@ -93,10 +93,10 @@ function save_new_pond(tx) {
     var photo_image = window.localStorage.getItem("photo");
 
     tx.executeSql(
-        'INSERT INTO ponds (id, latitude, altitude, name, path_image)' +
-        ' VALUES ( ? , ? , ? , ?, ? )',
-        [null, latitude, longitude, name, photo_image]
-    );
+            'INSERT INTO ponds (id, latitude, altitude, name, path_image)' +
+            ' VALUES ( ? , ? , ? , ?, ? )',
+            [null, latitude, longitude, name, photo_image]
+            );
 
     enableWifi(id, latitude, longitude, name);
 
@@ -176,8 +176,8 @@ function wifiEnableFail() {
 function edit_data_pond() {
 
     if ($('#nombre_poza_modif').val() == '' ||
-        $('#latitud_poza_modif').val() == '' ||
-        $('#longitud_poza_modif').val() == '') {
+            $('#latitud_poza_modif').val() == '' ||
+            $('#longitud_poza_modif').val() == '') {
         alert("Llene todos los campos por favor. ");
         return;
     }
@@ -193,11 +193,46 @@ function save_edited_pond(tx) {
 
     var photo_image = window.localStorage.getItem("photo");
 
+    cordova.plugin.pDialog.init({
+        theme: 'HOLO_DARK',
+        title: 'Espere Porfavor...',
+        progressStyle: 'HORIZONTAL'
+    }).setProgress(30).setMessage('Reubicando Geocerca...');
+    for (var x = 0; x < 100000000; x++) {
+    }
+    cordova.plugin.pDialog.setProgress(60);
+    for (var x = 0; x < 100000000; x++) {
+    }
+
+
+    window.geofence.addOrUpdate({
+        id: id, //A unique identifier of geofence 
+        latitude: latitude, //Geo latitude of geofence 
+        longitude: longitude, //Geo longitude of geofence 
+        radius: 20, //Radius of geofence in meters 
+        transitionType: 3, //Type of transition 1 - Enter, 2 - Exit, 3 - Both 
+        notification: {//Notification object 
+            title: "Entro a: " + name, //Title of notification 
+            text: "Preparense", //Text of notification 
+            openAppOnClick: false, //is main app activity should be opened after clicking on notification 
+            vibration: [3000] //Optional vibration pattern - see description 
+        }
+    }).then(function () {
+        cordova.plugin.pDialog.setProgress(100);
+        cordova.plugin.pDialog.setMessage('Geocerca Reubicada');
+        for (var x = 0; x < 100000000; x++) {
+        }
+        cordova.plugin.pDialog.dismiss();
+
+    }, function (reason) {
+        alert('Adding geofence failed', reason);
+    });
+
     tx.executeSql(
-        "UPDATE ponds SET latitude=?, altitude=?, name=?, path_image=? " +
-        "WHERE id=?",
-        [latitude, longitude, name, photo_image, id]
-    );
+            "UPDATE ponds SET latitude=?, altitude=?, name=?, path_image=? " +
+            "WHERE id=?",
+            [latitude, longitude, name, photo_image, id]
+            );
 
 
     window.location.href = "#listaPozas";
@@ -262,7 +297,7 @@ function get_pond(id) {
 
 function get_pond_from_db(tx) {
     tx.executeSql('SELECT * FROM ponds WHERE id=?',
-        [id_pond], querySelectSuccess, errorDB);
+            [id_pond], querySelectSuccess, errorDB);
 
 }
 
