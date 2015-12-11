@@ -12,7 +12,7 @@ function cancelar2() {
     
 
     //Regresamos a la pagina #listaPozas
-    window.location.href = "#registrarse";
+    window.location.href = "#index";
 }
 
 
