@@ -334,5 +334,35 @@ function select_pond_to_edit(id) {
 }
 
 
+function getLocationAlta(){
+navigator.geolocation.getCurrentPosition(setLocationAlta, setLocationAltaError);
+
+}
+
+function setLocationAlta(position){
+    var lat = position.coords.latitude;
+    var lon = position.coords.longitude;
+    document.getElementById("latitud_poza_alta").value = lat;
+    document.getElementById("longitud_poza_alta").value = lon;
+}
+
+function setLocationAltaError(){
+    alert("Error al obtener localizacion");
+}
+
+function getLocationEdit(){
+navigator.geolocation.getCurrentPosition(setLocationEdit, setLocationEditError);
+
+}
+
+function setLocationEditError(){
+    alert("Error al obtener localizacion");
+}
 
 
+function setLocationEdit(position){
+    var lat = position.coords.latitude;
+    var lon = position.coords.longitude;
+    document.getElementById("latitud_poza_modif").value = lat;
+    document.getElementById("longitud_poza_modif").value = lon;
+}

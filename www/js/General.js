@@ -7,6 +7,15 @@ function cancelar() {
     window.location.href = "#listaPozas";
 }
 
+function cancelar2() {
+
+    
+
+    //Regresamos a la pagina #listaPozas
+    window.location.href = "#registrarse";
+}
+
+
 function cerrarSesion() {
     document.getElementById("password_alta").value = "";
     document.getElementById("password_alta_repeticion").value = "";
